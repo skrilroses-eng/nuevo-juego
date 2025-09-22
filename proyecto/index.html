@@ -1,97 +1,246 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MORITA — Girasoles y Música</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<style>
-html, body {margin:0; padding:0; height:100%; background:#07120b; font-family:'Poppins', sans-serif; overflow:hidden;}
-.stage{position:relative; width:100%; height:100%; display:flex; justify-content:center; align-items:center; background: linear-gradient(180deg,#07120b 0%, #072112 40%, #0d2b17 100%);}
-.grass{position:absolute; left:0; right:0; bottom:0; height:45%; background-image: repeating-linear-gradient(180deg, rgba(16,58,26,0.2) 0 2px, transparent 2px 6px), linear-gradient(180deg, rgba(12,48,22,0.7), rgba(6,30,14,0.9)); z-index:1; transform:translateY(18%);}
-.fireflies, .stars, .floatingFlowers{position:absolute; inset:0; pointer-events:none; z-index:2;}
-.firefly, .star, .floatFlower{position:absolute; border-radius:50%; filter:blur(2px); opacity:0; mix-blend-mode:screen;}
-.firefly{width:6px; height:6px; background:radial-gradient(circle at 35% 30%, rgba(255,245,160,0.95) 0 30%, rgba(255,245,160,0.6) 30% 60%, rgba(255,245,160,0.0) 60% 100%);}
-.star{width:2px; height:2px; background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);}
-.center{position:relative; z-index:3; width:90vw; height:60vh; display:flex; justify-content:center; align-items:center;}
-svg{width:100%; height:100%; display:block;}
-.vignette{position:absolute; inset:0; pointer-events:none; z-index:4; background:radial-gradient(60% 50% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5) 100%);}
-@media (max-width:600px){ .center{height:50vh;} text#maskText{font-size:120px; letter-spacing:2px;} }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>MORITA — Girasoles Tiernos y Música</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #07120b;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #07120b 0%, #072112 40%, #0d2b17 100%);
+    }
+
+    .grass {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 45%;
+      background-image: repeating-linear-gradient(180deg, rgba(16,58,26,0.2) 0 2px, transparent 2px 6px),
+                        linear-gradient(180deg, rgba(12,48,22,0.7), rgba(6,30,14,0.9));
+      z-index: 1;
+      transform: translateY(18%);
+    }
+
+    .fireflies, .stars, .floatingFlowers {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .firefly, .star, .floatFlower {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0;
+      mix-blend-mode: screen;
+    }
+
+    .firefly {
+      width: 6px; height: 6px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,245,160,0.95) 0 30%, rgba(255,245,160,0.6) 30% 60%, rgba(255,245,160,0.0) 60% 100%);
+    }
+
+    .star {
+      width: 2px; height: 2px;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+    }
+
+    .center {
+      position: relative;
+      z-index: 3;
+      width: 92vw;
+      max-width: 1200px;
+      height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      background: radial-gradient(60% 50% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5) 100%);
+    }
+  </style>
 </head>
 <body>
-<div class="stage">
-<div class="grass"></div>
-<div class="fireflies" id="fireflies"></div>
-<div class="stars" id="stars"></div>
-<div class="floatingFlowers" id="floatingFlowers"></div>
-<div class="center">
-<svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<clipPath id="textClip">
-<text id="maskText" x="50%" y="52%" text-anchor="middle" font-family:'Poppins', sans-serif font-weight="700" font-size="220" letter-spacing="4">MORITA</text>
-</clipPath>
-</defs>
-<rect width="100%" height="100%" fill="transparent"></rect>
-<g clip-path="url(#textClip)">
-<g id="flowersLayer"></g>
-</g>
-<text x="50%" y="52%" text-anchor="middle" font-family:'Poppins', sans-serif font-weight="700" font-size="220" letter-spacing="4" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2">MORITA</text>
-</svg>
-</div>
-<div class="vignette"></div>
-<audio autoplay loop src="https://www.bensound.com/bensound-music/bensound-sunny.mp3"></audio>
-</div>
-<script>
-(function(){
-const flowersLayer = document.getElementById('flowersLayer');
-const maskText = document.getElementById('maskText');
-const floatingContainer = document.getElementById('floatingFlowers');
-const rand=(a,b)=>a+Math.random()*(b-a);
+  <div class="stage">
+    <div class="grass"></div>
+    <div class="fireflies" id="fireflies"></div>
+    <div class="stars" id="stars"></div>
+    <div class="floatingFlowers" id="floatingFlowers"></div>
+    <div class="center">
+      <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="textClip">
+            <text id="maskText" x="50%" y="52%" text-anchor="middle" font-family:'Comic Sans MS', cursive, sans-serif font-weight="700" font-size="20vw" letter-spacing="0.2vw">MORITA</text>
+          </clipPath>
+        </defs>
+        <rect width="100%" height="100%" fill="transparent"></rect>
+        <g clip-path="url(#textClip)">
+          <g id="flowersLayer"></g>
+        </g>
+        <text x="50%" y="52%" text-anchor="middle" font-family:'Comic Sans MS', cursive, sans-serif font-weight="700" font-size="20vw" letter-spacing="0.2vw" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2">MORITA</text>
+      </svg>
+    </div>
+    <div class="vignette"></div>
 
-function createSunflower(x,y,scaleTarget,delay,container){
-const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-g.setAttribute('transform',`translate(${x},${y}) scale(0)`);
-g.style.transformOrigin='center';
-const stem=document.createElementNS('http://www.w3.org/2000/svg','rect');
-stem.setAttribute('x',-3);stem.setAttribute('y',15);stem.setAttribute('width',6);stem.setAttribute('height',90);stem.setAttribute('rx',2);stem.setAttribute('fill','#2d6b2e');g.appendChild(stem);
-const head=document.createElementNS('http://www.w3.org/2000/svg','g');
-head.setAttribute('transform','translate(0,15)');
-for(let i=0;i<20;i++){const pet=document.createElementNS('http://www.w3.org/2000/svg','path');const angle=i*(360/20);
-pet.setAttribute('d','M0,0 q10,-20 20,0 q-10,10 -20,0');pet.setAttribute('fill','#ffd700');pet.setAttribute('opacity',0.95);
-pet.setAttribute('transform',`rotate(${angle}) translate(0,-20)`);head.appendChild(pet);}
-const disk=document.createElementNS('http://www.w3.org/2000/svg','circle');
-disk.setAttribute('r',15);disk.setAttribute('cx',0);disk.setAttribute('cy',0);disk.setAttribute('fill','#3b2e0f');head.appendChild(disk);
-g.appendChild(head);
-if(container===flowersLayer){container.appendChild(g);}else{
-const wrapper=document.createElement('div');wrapper.className='floatFlower';wrapper.style.width='60px';wrapper.style.height='60px';
-wrapper.style.position='absolute';wrapper.style.left=x+'px';wrapper.style.top=y+'px';
-wrapper.style.backgroundImage='url(https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_sky_backdrop.jpg)';
-wrapper.style.backgroundSize='cover';wrapper.style.opacity=0.9;document.body.appendChild(wrapper);animateFloat(wrapper);}
-const start=performance.now()+delay;
-const dur=1200+Math.random()*800;
-const swayOffset=rand(0,Math.PI*2);
-function animate(now){const t=Math.max(0,now-start);const p=Math.min(1,t/dur);
-g.setAttribute('transform',`translate(${x},${y-Math.sin(now/800+swayOffset)*15}) scale(${p*scaleTarget}) rotate(${Math.sin((now/1200)+swayOffset)*0.02*scaleTarget*50})`);
-head.setAttribute('transform',`translate(0,${15-Math.sin((now/600)+swayOffset)*6*p})`);requestAnimationFrame(animate);}
-requestAnimationFrame(animate);}
+    <!-- Audio local -->
+    <audio id="backgroundMusic" autoplay loop>
+      <source src="cancion.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
+  </div>
 
-function animateFloat(el){let directionX=rand(-0.4,0.4),directionY=rand(-0.3,0.3);
-function float(){let left=parseFloat(el.style.left)+directionX;let top=parseFloat(el.style.top)+directionY;
-if(left<0)directionX*=-1;if(left>window.innerWidth-60)directionX*=-1;
-if(top<0)directionY*=-1;if(top>window.innerHeight-60)directionY*=-1;
-el.style.left=left+'px';el.style.top=top+'px';requestAnimationFrame(float);}
-float();}
+  <script>
+  (function(){
+    const flowersLayer = document.getElementById('flowersLayer');
+    const maskText = document.getElementById('maskText');
+    const floatingContainer = document.getElementById('floatingFlowers');
+    const rand = (a,b)=> a + Math.random()*(b-a);
 
-function populateFlowers(){
-const bb=maskText.getBBox();
-const minX=bb.x,maxX=bb.x+bb.width,minY=bb.y,maxY=bb.y+bb.height;
-const cols=Math.floor(bb.width/60);const rows=Math.floor(bb.height/60);
-for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){const cx=minX+(c+Math.random())*((maxX-minX)/cols);
-const cy=minY+(r+Math.random())*((maxY-minY)/rows);createSunflower(cx,cy,1,rand(0,1200),flowersLayer);}}
-for(let i=0;i<15;i++){const x=rand(0,window.innerWidth-60);const y=rand(0,window.innerHeight-60);createSunflower(x,y,1,0,floatingContainer);}}
+    function createSunflower(x,y,scaleTarget,delay, container){
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('transform', `translate(${x},${y}) scale(0)`);
+      g.style.transformOrigin = 'center';
 
-function spawnParticles(containerId,n,type){
-const container=document.getElementById(containerId);const nodes=[];
-for(let i=0;i<n;i++){const el=document.createElement('div');el.className=type;container.appendChild(el);nodes.push(el);}
-nodes.forEach(el=>{el.style.left=rand(0,100)+'%';el.style.top=rand(0,100)+'%';el.style.opacity=rand(0.3,1);});
+      const stem = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      stem.setAttribute('x',-3); stem.setAttribute('y',15); stem.setAttribute('width',6); stem.setAttribute('height',90); stem.setAttribute('rx',2); stem.setAttribute('fill','#2d6b2e'); g.appendChild(stem);
+
+      const head = document.createElementNS('http://www.w3.org/2000/svg','g');
+      head.setAttribute('transform','translate(0,15)');
+      for(let i=0;i<20;i++){
+        const pet = document.createElementNS('http://www.w3.org/2000/svg','path');
+        const angle = i*(360/20);
+        pet.setAttribute('d','M0,0 q10,-20 20,0 q-10,10 -20,0');
+        pet.setAttribute('fill','#ffd700'); pet.setAttribute('opacity',0.95);
+        pet.setAttribute('transform',`rotate(${angle}) translate(0,-20)`);
+        head.appendChild(pet);
+      }
+      const disk = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      disk.setAttribute('r',15); disk.setAttribute('cx',0); disk.setAttribute('cy',0); disk.setAttribute('fill','#3b2e0f'); head.appendChild(disk);
+      g.appendChild(head);
+
+      if(container===flowersLayer){ container.appendChild(g); }
+      else{
+        const wrapper = document.createElement('div');
+        wrapper.className='floatFlower';
+        wrapper.style.width='60px';
+        wrapper.style.height='60px';
+        wrapper.style.position='absolute';
+        wrapper.style.left=x+'px';
+        wrapper.style.top=y+'px';
+        wrapper.style.backgroundImage='url(https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_sky_backdrop.jpg)';
+        wrapper.style.backgroundSize='cover';
+        wrapper.style.opacity=0.9;
+        document.body.appendChild(wrapper);
+        animateFloat(wrapper);
+      }
+
+      const start = performance.now()+delay;
+      const dur = 1200 + Math.random()*800;
+      const swayOffset = rand(0,Math.PI*2);
+
+      function animate(now){
+        const t = Math.max(0, now-start);
+        const p = Math.min(1, t/dur);
+        g.setAttribute('transform', `translate(${x},${y - Math.sin(now/800 + swayOffset)*15}) scale(${p*scaleTarget}) rotate(${Math.sin((now/1200)+swayOffset)*0.02*scaleTarget*50})`);
+        head.setAttribute('transform', `translate(0,${15 - Math.sin((now/600)+swayOffset)*6 * p})`);
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function animateFloat(el){
+      let directionX = rand(-0.4,0.4), directionY = rand(-0.3,0.3);
+      function float(){
+        let left = parseFloat(el.style.left) + directionX;
+        let top = parseFloat(el.style.top) + directionY;
+        if(left<0)directionX*=-1;if(left>window.innerWidth-60)directionX*=-1;
+        if(top<0)directionY*=-1;if(top>window.innerHeight-60)directionY*=-1;
+        el.style.left=left+'px'; el.style.top=top+'px';
+        requestAnimationFrame(float);
+      }
+      float();
+    }
+
+    function populateFlowers(){
+      const bb = maskText.getBBox();
+      const minX = bb.x, maxX = bb.x+bb.width;
+      const minY = bb.y, maxY = bb.y+bb.height;
+      const cols = Math.floor(bb.width/40);
+      const rows = Math.floor(bb.height/40);
+      for(let r=0;r<rows;r++){
+        for(let c=0;c<cols;c++){
+          const cx = minX + (c+Math.random())*((maxX-minX)/cols);
+          const cy = minY + (r+Math.random())*((maxY-minY)/rows);
+          createSunflower(cx, cy, 1, rand(0,1200), flowersLayer);
+        }
+      }
+      for(let i=0;i<15;i++){
+        const x = rand(0, window.innerWidth-60);
+        const y = rand(0, window.innerHeight-60);
+        createSunflower(x,y,1,0, floatingContainer);
+      }
+    }
+
+    function spawnParticles(containerId, n, type){
+      const container = document.getElementById(containerId);
+      const nodes = [];
+      for(let i=0;i<n;i++){
+        const el = document.createElement('div'); el.className=type; container.appendChild(el); nodes.push(el);
+      }
+      nodes.forEach(el=>{ el.style.left = rand(0,100)+'%'; el.style.top = rand(0,100)+'%'; el.style.opacity = rand(0.3,1); });
+      function animate(){
+        nodes.forEach((el)=>{
+          let left = parseFloat(el.style.left); let top = parseFloat(el.style.top);
+          left += (Math.random()-0.5)*0.2; top += (Math.random()-0.5)*0.2;
+          if(left<0)left=0;if(left>100)left=100;if(top<0)top=0;if(top>100)top=100;
+          el.style.left=left+'%'; el.style.top=top+'%';
+          el.style.transform=`scale(${0.5 + Math.abs(Math.sin(performance.now()/600))*0.9})`;
+        });
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('load',()=>{
+      populateFlowers();
+      spawnParticles('fireflies', 30, 'firefly');
+      spawnParticles('stars', 80, 'star'); // menos partículas para móviles
+    });
+
+    // Audio local y volumen
+    const music = document.getElementById('backgroundMusic');
+    music.volume = 0.4;
+
+    // Autoplay puede bloquearse en móviles, se inicia con toque
+    document.body.addEventListener('click', () => {
+      if(music.paused) music.play();
+    });
+
+  })();
+  </script>
+</body>
+</html>
